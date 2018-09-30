@@ -30,12 +30,20 @@ export default class App extends React.Component {
     }))
   }
 
+  onItemDeleted = (deletedIdx) => {
+    this.setState( (curState => ({
+      places: curState.places.filter( (place, idx) => idx != deletedIdx)
+    })))
+  }
+
   render() {
 
     return (
       <View style={styles.container}>
         <PlacesInput onPlaceAdded={this.onPlaceAdded} />
-        <PlacesList places={this.state.places} />
+        <PlacesList 
+        places={this.state.places} 
+        onItemDeleted={this.onItemDeleted}/>
       </View>
     );
   }
