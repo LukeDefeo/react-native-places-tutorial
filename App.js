@@ -17,6 +17,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import PlacesInput from './src/components/PlacesInput/PlacesInput.js';
 import PlacesList from './src/components/PlacesList/PlacesList.js';
+import tajImage from './src/assets/taj.jpg'
 
 export default class App extends React.Component {
 
@@ -24,11 +25,14 @@ export default class App extends React.Component {
     places: []
   };
 
+
+
   onPlaceAdded = (placeName) => {
     this.setState(curState => ({
       places: curState.places.concat({
         name: placeName,
-        key: Math.random().toString()
+        key: Math.random().toString(),
+        image: tajImage
       })
     }))
   }
