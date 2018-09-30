@@ -15,6 +15,7 @@
 
 import React from 'react';
 import { Platform, StyleSheet, Text, View, TextInput, Button, Slider } from 'react-native';
+import ListItem from './src/components/ListItem/ListItem.js'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -89,7 +90,12 @@ export default class App extends React.Component {
   }
 
   render() {
-    const placesOutput = this.state.places.map((place, idx) => <Text key={idx}>{place} </Text>);
+    const placesOutput = this.state.places.map((place, idx) => (
+      <ListItem
+        key={idx}
+        placeName={place} />
+    ));
+ 
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
@@ -106,7 +112,7 @@ export default class App extends React.Component {
           />
         </View>
 
-        <View>
+        <View style={styles.listContainer}>
           {placesOutput}
         </View>
         {/* <VerticalSlider></VerticalSlider> */}
@@ -139,5 +145,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center"
+  },
+  listContainer: {
+    // backgroundColor: "red",
+    // alignItems: "stretch"
+    // flex: 1,
+    width: "100%"
   }
 });
