@@ -14,7 +14,7 @@
 // type Props = {};
 
 import React from 'react';
-import {Platform, StyleSheet, Text, View, TextInput, Button, Slider } from 'react-native';
+import { Platform, StyleSheet, Text, View, TextInput, Button, Slider } from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -36,13 +36,26 @@ export class VerticalSlider extends React.Component {
           value={50}
           minimumTrackTintColor="black"
           style={{
-            height: 300,
-            width:  300,
             transform: [{ rotate: '90deg' }]
           }}
         />
         <Text>Hello</Text>
+        <View style={{ flex: 1 }}>
+          <Text>Hello</Text>
+        </View>
+        <View style={{ flex: 1 }}>
+          <Slider
+            maximumValue={100}
+            minimumValue={0}
+            value={50}
+            minimumTrackTintColor="black"
+            style={{ transform: [{ rotate: '90deg' }] }} />
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text>Hello</Text>
+        </View>
       </View>
+
 
     )
   }
@@ -79,9 +92,9 @@ export default class App extends React.Component {
     const placesOutput = this.state.places.map((place, idx) => <Text key={idx}>{place} </Text>);
     return (
       <View style={styles.container}>
-        {/* <View style={styles.inputContainer}>
+        <View style={styles.inputContainer}>
           <TextInput
-            style={{ width: 300, borderColor: "black", borderWidth: 1 }}
+            style={styles.placeInput}
             placeholder="A place"
             value={this.state.placeName}
             onChangeText={this.placeNameChangedHandler}
@@ -93,12 +106,10 @@ export default class App extends React.Component {
           />
         </View>
 
-
-
         <View>
           {placesOutput}
-        </View> */}
-        <VerticalSlider></VerticalSlider>
+        </View>
+        {/* <VerticalSlider></VerticalSlider> */}
 
       </View>
 
@@ -112,46 +123,21 @@ const styles = StyleSheet.create({
     padding: 40,
     backgroundColor: '#fff',
     alignItems: 'stretch',
-    justifyContent: 'flex-start',
-    // alignItems: 'flex-start'
+    // justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  placeInput: {
+    width: "80%",
+    // borderColor: "black",
+    // borderWidth: 1
   },
   placeButtom: {
-
+    width: "30%"
   },
   inputContainer: {
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems: "center"
   }
 });
-
-
-// export default class App extends Component<Props> {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text style={styles.welcome}>Welcome to React Native!</Text>
-//         <Text style={styles.instructions}>To get started, edit App.js</Text>
-//         <Text style={styles.instructions}>{instructions}</Text>
-//       </View>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
-// });
