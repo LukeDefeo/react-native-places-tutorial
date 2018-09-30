@@ -24,15 +24,18 @@ export default class App extends React.Component {
     places: []
   };
 
-  onPlaceAdded = (place) => {
-    this.setState(currentState => ({
-      places: currentState.places.concat(place)
+  onPlaceAdded = (placeName) => {
+    this.setState(curState => ({
+      places: curState.places.concat({
+        name: placeName,
+        key: Math.random().toString()
+      })
     }))
   }
 
-  onItemDeleted = (deletedIdx) => {
-    this.setState( (curState => ({
-      places: curState.places.filter( (place, idx) => idx != deletedIdx)
+  onItemDeleted = (key) => {
+    this.setState((curState => ({
+      places: curState.places.filter(place => place.key != key)
     })))
   }
 
@@ -41,9 +44,9 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <PlacesInput onPlaceAdded={this.onPlaceAdded} />
-        <PlacesList 
-        places={this.state.places} 
-        onItemDeleted={this.onItemDeleted}/>
+        <PlacesList
+          places={this.state.places}
+          onItemDeleted={this.onItemDeleted} />
       </View>
     );
   }

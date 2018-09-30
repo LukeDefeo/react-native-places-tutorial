@@ -1,28 +1,29 @@
 
 import React from 'react'
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ScrollView, FlatList } from 'react-native';
 import ListItem from '../ListItem/ListItem.js'
 
 
 const PlacesList = (props) => {
-    const placesOutput = props.places.map((place, idx) => (
+  return (
+    <FlatList
+      style={styles.listContainer}
+      data={props.places}
+      renderItem={({ item }) => (
         <ListItem
-            key={idx}
-            placeName={place}
-            onItemPressed={() => props.onItemDeleted(idx)} />
-    ));
-    return (
-        <View style={styles.listContainer}>
-            {placesOutput}
-        </View>
-    )
+          placeName={item.name}
+          onItemPressed={() => props.onItemDeleted(item.key)}
+        />
+      )}
+    />
+  )
 }
 
 const styles = StyleSheet.create({
 
-    listContainer: {
-        width: "100%"
-    }
+  listContainer: {
+    width: "100%"
+  }
 });
 
 export default PlacesList
