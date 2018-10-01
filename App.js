@@ -18,11 +18,13 @@ import { StyleSheet, View } from 'react-native';
 import PlacesInput from './src/components/PlacesInput/PlacesInput.js';
 import PlacesList from './src/components/PlacesList/PlacesList.js';
 import tajImage from './src/assets/taj.jpg'
+import PlaceDetail from './src/components/PlaceDetail/PlaceDetail.js';
 
 export default class App extends React.Component {
 
   state = {
-    places: []
+    places: [],
+    selectedPlace: null
   };
 
 
@@ -37,20 +39,38 @@ export default class App extends React.Component {
     }))
   }
 
-  onItemDeleted = (key) => {
+
+  onItemSelected = (key) => {
     this.setState((curState => ({
-      places: curState.places.filter(place => place.key != key)
+      selectedPlace: curState.places.find(place => place.key === key)
     })))
+  }
+
+  onPlaceDeleted = () => {
+    this.setState((curState => ({
+      places: curState.places.filter(place => place.key != curState.selectedPlace.key),
+      selectedPlace: null
+    })))
+  }
+
+  onModalClosed = () => {
+    this.setState({
+      selectedPlace:  null
+    })
   }
 
   render() {
 
     return (
       <View style={styles.container}>
+        <PlaceDetail
+         place={this.state.selectedPlace}
+         onItemDeleted={this.onPlaceDeleted}
+         onModalClosed={this.onModalClosed} />
         <PlacesInput onPlaceAdded={this.onPlaceAdded} />
         <PlacesList
           places={this.state.places}
-          onItemDeleted={this.onItemDeleted} />
+          onItemSelected={this.onItemSelected} />
       </View>
     );
   }
