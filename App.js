@@ -14,49 +14,29 @@
 // type Props = {};
 
 import React from 'react';
+import {connect} from 'react-redux'
 import { StyleSheet, View } from 'react-native';
 import PlacesInput from './src/components/PlacesInput/PlacesInput.js';
 import PlacesList from './src/components/PlacesList/PlacesList.js';
 import tajImage from './src/assets/taj.jpg'
 import PlaceDetail from './src/components/PlaceDetail/PlaceDetail.js';
-
-export default class App extends React.Component {
-
-  state = {
-    places: [],
-    selectedPlace: null
-  };
-
-
+import {addPlace, deletePlace, selectPlace, deselectPlace} from './src/store/actions/index'
+class App extends React.Component {
 
   onPlaceAdded = (placeName) => {
-    this.setState(curState => ({
-      places: curState.places.concat({
-        name: placeName,
-        key: Math.random().toString(),
-        image: tajImage
-      })
-    }))
+    this.props.onAddPlace(placeName)
   }
 
-
   onItemSelected = (key) => {
-    this.setState((curState => ({
-      selectedPlace: curState.places.find(place => place.key === key)
-    })))
+    this.props.onSelectPlace(key)
   }
 
   onPlaceDeleted = () => {
-    this.setState((curState => ({
-      places: curState.places.filter(place => place.key != curState.selectedPlace.key),
-      selectedPlace: null
-    })))
+    this.props.onDeletePlace()
   }
 
   onModalClosed = () => {
-    this.setState({
-      selectedPlace:  null
-    })
+    this.props.onDeselectPlace()
   }
 
   render() {
@@ -64,12 +44,12 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <PlaceDetail
-         place={this.state.selectedPlace}
+         place={this.props.selectedPlace}
          onItemDeleted={this.onPlaceDeleted}
          onModalClosed={this.onModalClosed} />
         <PlacesInput onPlaceAdded={this.onPlaceAdded} />
         <PlacesList
-          places={this.state.places}
+          places={this.props.places}
           onItemSelected={this.onItemSelected} />
       </View>
     );
@@ -85,3 +65,21 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+const mapStateToProps = (state) => {
+  return {
+    places: state.places.places,
+    selectedPlace: state.places.selectedPlace
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddPlace: (name) => dispatch(addPlace(name)),
+    onDeletePlace: () => dispatch(deletePlace()),
+    onSelectPlace: (key) => dispatch(selectPlace(key)),
+    onDeselectPlace: () => dispatch(deselectPlace())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
