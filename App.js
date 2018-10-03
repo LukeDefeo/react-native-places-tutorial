@@ -15,8 +15,8 @@ Navigation.registerComponent("react-native-places.AuthScreen", () => AuthScreen,
 Navigation.registerComponent("react-native-places.SharePlaceScreen", () => SharePlaceScreen, store, Provider)
 Navigation.registerComponent("react-native-places.FindPlaceScreen", () => FindPlaceScreen, store, Provider)
 
-//this screen doesnt need redux
-Navigation.registerComponent("react-native-places.PlaceDetailsScreen", () => PlaceDetailScreen)
+//if  screen doesnt need redux you dont have to pass store and provider to register
+Navigation.registerComponent("react-native-places.PlaceDetailsScreen", () => PlaceDetailScreen, store, Provider)
 
 //start app
 
