@@ -2,6 +2,7 @@ import { Navigation } from 'react-native-navigation';
 import AuthScreen from './src/screens/Auth/Auth'
 import FindPlaceScreen from './src/screens/FindPlace/FindPlace'
 import SharePlaceScreen from './src/screens/SharePlace/SharePlace'
+import PlaceDetailScreen from './src/screens/PlaceDetail/PlaceDetail'
 import { Provider } from 'react-redux'
 import configureStore from './src/store/configureStore'
 
@@ -13,6 +14,9 @@ const store = configureStore()
 Navigation.registerComponent("react-native-places.AuthScreen", () => AuthScreen, store, Provider)
 Navigation.registerComponent("react-native-places.SharePlaceScreen", () => SharePlaceScreen, store, Provider)
 Navigation.registerComponent("react-native-places.FindPlaceScreen", () => FindPlaceScreen, store, Provider)
+
+//this screen doesnt need redux
+Navigation.registerComponent("react-native-places.PlaceDetailsScreen", () => PlaceDetailScreen)
 
 //start app
 
