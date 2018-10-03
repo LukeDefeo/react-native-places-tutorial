@@ -5,7 +5,7 @@ import SharePlaceScreen from './src/screens/SharePlace/SharePlace'
 import PlaceDetailScreen from './src/screens/PlaceDetail/PlaceDetail'
 import { Provider } from 'react-redux'
 import configureStore from './src/store/configureStore'
-
+import SideDrawer from './src/screens/SideDrawer/SideDrawer'
 //setup redux store
 const store = configureStore()
 
@@ -14,9 +14,10 @@ const store = configureStore()
 Navigation.registerComponent("react-native-places.AuthScreen", () => AuthScreen, store, Provider)
 Navigation.registerComponent("react-native-places.SharePlaceScreen", () => SharePlaceScreen, store, Provider)
 Navigation.registerComponent("react-native-places.FindPlaceScreen", () => FindPlaceScreen, store, Provider)
+Navigation.registerComponent("react-native-places.PlaceDetailsScreen", () => PlaceDetailScreen, store, Provider)
 
 //if  screen doesnt need redux you dont have to pass store and provider to register
-Navigation.registerComponent("react-native-places.PlaceDetailsScreen", () => PlaceDetailScreen, store, Provider)
+Navigation.registerComponent("react-native-places.SideDrawerScreen", () => SideDrawer)
 
 //start app
 
